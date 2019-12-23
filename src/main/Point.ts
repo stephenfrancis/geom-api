@@ -25,6 +25,11 @@ export default class Point {
   }
 
 
+  public getCoords(): [number, number] {
+    return [ this.x, this.y ];
+  }
+
+
   public getX(): number {
     return this.x;
   }
