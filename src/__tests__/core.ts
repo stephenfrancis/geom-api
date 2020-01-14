@@ -1,4 +1,5 @@
 
+import LineSegment from "../main/LineSegment";
 import Point from "../main/Point";
 import Vector from "../main/Vector";
 
@@ -54,5 +55,21 @@ test("stuff", () => {
   let f: Point = v.toPoint();
   expect(f.getX().toFixed(5)).toBe("-20.00000");
   expect(f.getY().toFixed(5)).toBe("-20.00000");
+
+});
+
+
+test("line", () => {
+  const l1 = new LineSegment(new Point(3, 2), new Point(7, 5));
+  const gi1 = l1.getGradientIntersection();
+  expect(gi1).toEqual([ 0.75, -0.25 ]);
+
+  const l2 = new LineSegment(new Point(3, 2), new Point(7, 2));
+  const gi2 = l2.getGradientIntersection();
+  expect(gi2).toEqual([ 0, 2 ]);
+
+  const l3 = new LineSegment(new Point(3, 2), new Point(3, 9));
+  const gi3 = l3.getGradientIntersection();
+  expect(gi3).toEqual([ Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY ]);
 
 });

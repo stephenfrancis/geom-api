@@ -1,5 +1,6 @@
 
 import Point from "./Point";
+import Vector from "./Vector";
 
 
 export default class LineSegment {
@@ -28,8 +29,31 @@ export default class LineSegment {
   }
 
 
+  public getGradientIntersection(): [number, number] {
+    const out: [number, number] = [ null, null ];
+    const x_diff: number = (this.to.getX() - this.from.getX());
+    if (x_diff === 0) {
+      out[0] = Number.POSITIVE_INFINITY;
+      out[1] = Number.POSITIVE_INFINITY;
+    } else {
+      out[0] = (this.to.getY() - this.from.getY()) / x_diff;
+      if (out[0] === 0) {
+        out[1] = this.to.getY();
+      } else {
+        out[1] = this.to.getY() - (out[0] * this.to.getX());
+      }
+    }
+    return out;
+  }
+
+
   public getTo(): Point {
     return this.to;
+  }
+
+
+  public getVector(): Vector {
+    return Vector.fromOriginTo(this.to.subtract(this.from));
   }
 
 
