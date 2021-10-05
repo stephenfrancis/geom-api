@@ -87,6 +87,10 @@ export default class Direction {
     return this.id;
   }
 
+  public getOppositeAngle(): number {
+    return this.ang + (180 % 360);
+  }
+
   public static nearest(bearing: number): Direction {
     const index: number = Math.floor((bearing + 22.5) / 45) % 8;
     const dir: Direction = Direction.ordered[index];
