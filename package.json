@@ -1,6 +1,6 @@
 {
   "name": "geom-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./src/main/Entry.ts",
   "types": "./src/main/Entry.ts",
   "description": "Object Model for Basic Geometric Entities",
