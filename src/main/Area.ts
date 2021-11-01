@@ -25,10 +25,10 @@ export default class Area {
 
   public contains(point: Point): boolean {
     return (
-      this.top_left.getX() <= point.getX() &&
-      this.top_left.getY() <= point.getY() &&
-      this.bottom_right.getX() >= point.getX() &&
-      this.bottom_right.getY() >= point.getY()
+      this.getMinX() <= point.getX() &&
+      this.getMinY() <= point.getY() &&
+      this.getMaxX() >= point.getX() &&
+      this.getMaxY() >= point.getY()
     );
   }
 
@@ -38,16 +38,31 @@ export default class Area {
   }
 
   public getAttributes(): [number, number, number, number] {
-    return [
-      this.top_left.getX(),
-      this.top_left.getY(),
-      this.bottom_right.getX() - this.top_left.getX(), // width
-      this.bottom_right.getY() - this.top_left.getY(), // height
-    ];
+    return [this.getMinX(), this.getMinY(), this.getWidth(), this.getHeight()];
   }
 
   public getBottomRight(): Point {
     return this.bottom_right;
+  }
+
+  public getHeight(): number {
+    return this.getMaxY() - this.getMinY();
+  }
+
+  public getMaxX(): number {
+    return this.bottom_right.getX();
+  }
+
+  public getMaxY(): number {
+    return this.bottom_right.getY();
+  }
+
+  public getMinX(): number {
+    return this.top_left.getX();
+  }
+
+  public getMinY(): number {
+    return this.top_left.getY();
   }
 
   public getPerimeter(): number {
@@ -59,21 +74,26 @@ export default class Area {
     return this.top_left;
   }
 
+  public getWidth(): number {
+    return this.getMaxX() - this.getMinX();
+  }
+
   public isContainedBy(area: Area): boolean {
     return (
-      this.top_left.getX() >= area.getTopLeft().getX() &&
-      this.top_left.getY() >= area.getTopLeft().getY() &&
-      this.bottom_right.getX() <= area.getBottomRight().getX() &&
-      this.bottom_right.getY() <= area.getBottomRight().getY()
+      this.getMinX() >= area.getMinX() &&
+      this.getMinY() >= area.getMinY() &&
+      this.getMaxX() <= area.getMaxX() &&
+      this.getMaxY() <= area.getMaxY()
     );
   }
 
   public overlaps(area: Area): boolean {
     return (
-      (this.top_left.getX() <= area.getBottomRight().getX() ||
-        area.getTopLeft().getX() <= this.bottom_right.getX()) &&
-      (this.top_left.getY() <= area.getBottomRight().getY() ||
-        area.getTopLeft().getY() <= this.bottom_right.getY())
+      ((area.getMinX() <= this.getMinX() && this.getMinX() <= area.getMaxX()) ||
+        (this.getMinX() <= area.getMinX() &&
+          area.getMinX() <= this.getMaxX())) &&
+      ((area.getMinY() <= this.getMinY() && this.getMinY() <= area.getMaxY()) ||
+        (this.getMinY() <= area.getMinY() && area.getMinY() <= this.getMaxY()))
     );
   }
 
