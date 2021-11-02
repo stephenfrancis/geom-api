@@ -42,6 +42,13 @@ export default class LineSegment {
     return out;
   }
 
+  public getLength(): number {
+    return Math.sqrt(
+      (this.to.getX() - this.from.getX()) ** 2 +
+        (this.to.getY() - this.from.getY()) ** 2
+    );
+  }
+
   public getTo(): Point {
     return this.to;
   }

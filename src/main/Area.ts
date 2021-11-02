@@ -41,8 +41,19 @@ export default class Area {
     return [this.getMinX(), this.getMinY(), this.getWidth(), this.getHeight()];
   }
 
+  public getBottomLeft(): Point {
+    return new Point(this.getMinX(), this.getMaxY());
+  }
+
   public getBottomRight(): Point {
     return this.bottom_right;
+  }
+
+  public getCentre(): Point {
+    return new Point(
+      (this.getMinX() + this.getMaxX()) / 2,
+      (this.getMinY() + this.getMaxY()) / 2
+    );
   }
 
   public getHeight(): number {
@@ -72,6 +83,10 @@ export default class Area {
 
   public getTopLeft(): Point {
     return this.top_left;
+  }
+
+  public getTopRight(): Point {
+    return new Point(this.getMaxX(), this.getMinY());
   }
 
   public getWidth(): number {

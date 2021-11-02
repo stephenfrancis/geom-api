@@ -59,14 +59,17 @@ test("point and vector", () => {
 test("line", () => {
   const l1 = new LineSegment(new Point(3, 2), new Point(7, 5));
   const gi1 = l1.getGradientIntersection();
+  expect(l1.getLength()).toBe(5);
   expect(gi1).toEqual([0.75, -0.25]);
 
   const l2 = new LineSegment(new Point(3, 2), new Point(7, 2));
   const gi2 = l2.getGradientIntersection();
+  expect(l2.getLength()).toBe(4);
   expect(gi2).toEqual([0, 2]);
 
   const l3 = new LineSegment(new Point(3, 2), new Point(3, 9));
   const gi3 = l3.getGradientIntersection();
+  expect(l3.getLength()).toBe(7);
   expect(gi3).toEqual([Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
 });
 
@@ -80,6 +83,9 @@ test("area", () => {
   expect(a1.getHeight()).toBe(6);
   expect(a1.getArea()).toBe(36);
   expect(a1.getPerimeter()).toBe(24);
+  expect(a1.getBottomLeft().getCoords()).toStrictEqual([3, 8]);
+  expect(a1.getTopRight().getCoords()).toStrictEqual([9, 2]);
+  expect(a1.getCentre().getCoords()).toStrictEqual([6, 5]);
 
   expect(a1.contains(new Point(5, 7))).toBe(true);
   expect(a1.contains(new Point(10, 7))).toBe(false);
