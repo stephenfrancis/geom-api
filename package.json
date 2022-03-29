@@ -4,16 +4,16 @@
   "main": "./src/main/Entry.ts",
   "types": "./src/main/Entry.ts",
   "description": "Object Model for Basic Geometric Entities",
-  "scripts": {
-    "clean": "rm -f -r build/*",
-    "test": "npx jest"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:stephenfrancis/geom-api"
   },
   "author": "stephen.d.francis@gmail.com",
   "license": "Apache-2.0",
+  "scripts": {
+    "clean": "rm -f -r build/*",
+    "test": "npx jest"
+  },
   "jest": {
     "moduleFileExtensions": [
       "ts",
